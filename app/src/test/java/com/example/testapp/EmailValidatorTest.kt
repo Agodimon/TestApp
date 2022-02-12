@@ -67,7 +67,7 @@ class EmailValidatorTest {
 
     @Test
     fun checking_null_in_email(){
-        assertNull(EmailValidator.isValidEmail(null))
+        assertNull(EmailValidator.isValidEmail(email = null))
     }
 
     @Test
