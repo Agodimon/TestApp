@@ -21,6 +21,8 @@ class EmailValidator : TextWatcher {
     ) = Unit
 
     companion object {
+const val NAME_MAIL = "NAME_MAIL"
+
         /**
          * Паттерн для сравнения. */
         private val EMAIL_PATTERN = Pattern.compile(
@@ -36,5 +38,14 @@ class EmailValidator : TextWatcher {
         fun isValidEmail(email: CharSequence?): Boolean {
             return email != null && EMAIL_PATTERN.matcher(email).matches()
         }
+
+        fun isArrayEmailsEquals(): Array<String> = arrayOf("one@mail.com", "two@mail.com", "three@mail.com")
+
+        fun isEqualsNameEmail():String = "ex@mail.ru"
+
+        fun isSameCheckOne(): String = NAME_MAIL
+        fun isSameCheckTwo(): String = NAME_MAIL
+
+        fun isNotSameEmail() = "agodimon@mail.ru"
     }
 }

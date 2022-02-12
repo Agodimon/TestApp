@@ -1,5 +1,6 @@
 package com.example.testapp
 
+import com.google.android.material.internal.NavigationMenu
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -46,5 +47,52 @@ class EmailValidatorTest {
     }
 
 
+    @Test
+    fun check_isDomain() {
+        assertFalse(EmailValidator.isValidEmail("name@.com"))
+    }
+    @Test
+    fun checking_valid_symbols_in_name() {
+        assertFalse(EmailValidator.isValidEmail("&<>$#@mail.com"))
+    }
+    @Test
+    fun checking_valid_characters_in_domain() {
+        assertFalse(EmailValidator.isValidEmail("name@&$<>?.com"))
+    }
 
+    @Test
+    fun checking_not_empty(){
+        assertNotNull(EmailValidator.isValidEmail("name@mail.com"))
+    }
+
+    @Test
+    fun checking_null_in_email(){
+        assertNull(EmailValidator.isValidEmail(null))
+    }
+
+    @Test
+    fun checking_not_equals() {
+        assertNotEquals(EmailValidator.isValidEmail("name@mail.com"), "exam@mail.com")
+    }
+
+    @Test
+    fun checking_equals() {
+        assertEquals(EmailValidator.isValidEmail(EmailValidator.isEqualsNameEmail()), "ex@mail.ru")
+    }
+
+    @Test
+    fun is_array_emails_equals() {
+        assertArrayEquals(EmailValidator.isArrayEmailsEquals(), arrayOf("one@mail.com", "two@mail.com", "three@mail.com"))
+    }
+
+    @Test
+    fun is_same_emails() {
+        assertSame(EmailValidator.isSameCheckOne(),EmailValidator.isSameCheckTwo())
+    }
+
+
+    @Test
+    fun is_not_same_emails() {
+        assertNotSame(EmailValidator.isSameCheckOne(),EmailValidator.isNotSameEmail())
+    }
 }
