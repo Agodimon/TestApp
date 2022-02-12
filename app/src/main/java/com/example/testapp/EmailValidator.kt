@@ -1,5 +1,4 @@
 package com.example.testapp
-
 import android.text.Editable
 import android.text.TextWatcher
 import java.util.regex.Pattern
