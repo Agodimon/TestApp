@@ -103,6 +103,6 @@ class GitHubRepositoryTest {
             gitHubRepositoryCallBack.handleGitHubResponse(response)
         }
         repository.searchGithub(searchQuery, gitHubRepositoryCallBack)
-        verify(gitHubRepositoryCallBack, times(1)).handleGitHubResponse(response)
+        verify(gitHubRepositoryCallBack, times(0)).handleGitHubResponse(response)
     }
 }
