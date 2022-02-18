@@ -6,6 +6,7 @@ import com.example.testapp.presenter.search.SearchPresenter
 import com.example.testapp.repository.GitHubRepository
 import com.example.testapp.view.ViewContract
 import com.example.testapp.view.search.ViewSearchContract
+import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -151,5 +152,28 @@ class SearchPresenterTest {
         //Убеждаемся, что ответ от сервера обрабатывается корректно
         verify(viewContract, times(1)).displaySearchResults(searchResults, 101)
 
+    }
+    @Test
+    fun attachView_PresenterTest() {
+        presenter.onAttach(viewContract)
+        val instance = presenter.javaClass
+        instance.declaredFields.forEach {
+            it.isAccessible = true
+            if (it.name == "view") {
+                Assert.assertEquals(viewContract, it.get(presenter))
+            }
+        }
+    }
+
+    @Test
+    fun detachView_Presenter_Test() {
+        presenter.onDetach()
+        val instance = presenter.javaClass
+        instance.declaredFields.forEach {
+            it.isAccessible = true
+            if (it.name == "view"){
+                Assert.assertNull(it.get(presenter))
+            }
+        }
     }
 }
