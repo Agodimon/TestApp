@@ -4,11 +4,13 @@ import com.example.testapp.model.SearchResponse
 import com.example.testapp.model.SearchResult
 import com.example.testapp.presenter.search.SearchPresenter
 import com.example.testapp.repository.GitHubRepository
+import com.example.testapp.view.ViewContract
 import com.example.testapp.view.search.ViewSearchContract
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import retrofit2.Response
@@ -148,5 +150,6 @@ class SearchPresenterTest {
 
         //Убеждаемся, что ответ от сервера обрабатывается корректно
         verify(viewContract, times(1)).displaySearchResults(searchResults, 101)
+
     }
 }
