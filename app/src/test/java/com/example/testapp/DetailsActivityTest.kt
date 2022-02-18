@@ -19,12 +19,13 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
+
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [Build.VERSION_CODES.O_MR1])
+@Config(sdk = [Build.VERSION_CODES.R])
 class DetailsActivityTest {
 
     private lateinit var scenario: ActivityScenario<DetailsActivity>
-    private var context: Context= ApplicationProvider.getApplicationContext()
+    private var context: Context = ApplicationProvider.getApplicationContext()
 
     @Before
     fun setup() {
