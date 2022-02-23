@@ -22,13 +22,5 @@ internal class DetailsPresenter internal constructor(
         viewContract.setCount(count)
     }
 
-    override fun onAttach(view: ViewContract) {
-        if (this.view == null && this.view != view) {
-            this.view = view
-        }
-    }
 
-    override fun onDetach() {
-        view = null
-    }
 }

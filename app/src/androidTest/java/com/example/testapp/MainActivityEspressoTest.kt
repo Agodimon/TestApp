@@ -28,10 +28,15 @@ class MainActivityEspressoTest {
     @Test
     fun activitySearch_IsWorking() {
         onView(withId(R.id.searchEditText)).perform(click())
-        onView(withId(R.id.searchEditText)).perform(replaceText("algol"),closeSoftKeyboard())
+        onView(withId(R.id.searchEditText)).perform(replaceText("algol"), closeSoftKeyboard())
         onView(withId(R.id.searchEditText)).perform(pressImeActionButton())
-        onView(isRoot()).perform(delay())
-        onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: 2887")))
+
+        if (BuildConfig.TYPE == MainActivity.FAKE) {
+            onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: 42")))
+        } else {
+            onView(isRoot()).perform(delay())
+            onView(withId(R.id.totalCountTextView)).check(matches(withText("Number of results: 2887")))
+        }
     }
 
     private fun delay(): ViewAction {

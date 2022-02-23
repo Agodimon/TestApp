@@ -7,12 +7,15 @@ import android.widget.*
 import android.widget.TextView.OnEditorActionListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.testapp.BuildConfig
 import com.example.testapp.R
 import com.example.testapp.model.SearchResult
 import com.example.testapp.presenter.search.PresenterSearchContract
 import com.example.testapp.presenter.search.SearchPresenter
+import com.example.testapp.repository.FakeGitHubRepository
 import com.example.testapp.repository.GitHubApi
 import com.example.testapp.repository.GitHubRepository
+import com.example.testapp.repository.RepositoryContract
 import com.example.testapp.view.details.DetailsActivity
 
 import retrofit2.Retrofit
@@ -64,8 +67,12 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
         })
     }
 
-    private fun createRepository(): GitHubRepository {
-        return GitHubRepository(createRetrofit().create(GitHubApi::class.java))
+    private fun createRepository(): RepositoryContract {
+        return if (BuildConfig.TYPE == FAKE) {
+            FakeGitHubRepository()
+        } else {
+            GitHubRepository(createRetrofit().create(GitHubApi::class.java))
+        }
     }
 
     private fun createRetrofit(): Retrofit {
@@ -104,7 +111,10 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
         }
     }
 
-    companion object {
-        const val BASE_URL = "https://api.github.com"
-    }
+
+        companion object {
+            const val BASE_URL = "https://api.github.com"
+            const val FAKE = "FAKE"
+        }
+
 }
