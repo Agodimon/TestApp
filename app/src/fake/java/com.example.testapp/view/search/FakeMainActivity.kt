@@ -1,4 +1,4 @@
-package com.example.testapp.view.search
+package com.example.testapp
 
 import android.os.Bundle
 import android.view.View
@@ -7,20 +7,23 @@ import android.widget.*
 import android.widget.TextView.OnEditorActionListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.testapp.R
+
 import com.example.testapp.model.SearchResult
 import com.example.testapp.presenter.search.PresenterSearchContract
 import com.example.testapp.presenter.search.SearchPresenter
+import com.example.testapp.repository.FakeGitHubRepository
 import com.example.testapp.repository.GitHubApi
 import com.example.testapp.repository.GitHubRepository
 import com.example.testapp.repository.RepositoryContract
 import com.example.testapp.view.details.DetailsActivity
+import com.example.testapp.view.search.SearchResultAdapter
+import com.example.testapp.view.search.ViewSearchContract
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
-class MainActivity : AppCompatActivity(), ViewSearchContract {
+class FakeMainActivity : AppCompatActivity(), ViewSearchContract {
 
     private val adapter = SearchResultAdapter()
     private val presenter: PresenterSearchContract = SearchPresenter(this, createRepository())
@@ -28,7 +31,7 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_fake_main)
         setUI()
     }
 
@@ -54,7 +57,7 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
                     return@OnEditorActionListener true
                 } else {
                     Toast.makeText(
-                        this@MainActivity,
+                        this@FakeMainActivity,
                         getString(R.string.enter_search_word),
                         Toast.LENGTH_SHORT
                     ).show()
@@ -66,7 +69,7 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
     }
 
     private fun createRepository(): RepositoryContract {
-        return  GitHubRepository(createRetrofit().create(GitHubApi::class.java))
+        return FakeGitHubRepository()
     }
 
     private fun createRetrofit(): Retrofit {
@@ -106,9 +109,9 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
     }
 
 
-        companion object {
-            const val BASE_URL = "https://api.github.com"
-            const val FAKE = "FAKE"
-        }
+    companion object {
+        const val BASE_URL = "https://api.github.com"
+        const val FAKE = "FAKE"
+    }
 
 }

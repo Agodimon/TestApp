@@ -51,6 +51,13 @@ android {
             buildConfigField "String", "TYPE", '"REAL"'
         }
     }
+    sourceSets {
+        fake {
+            java {
+                srcDirs 'src/fake/java', 'src/fake/java/com.example.testapp.view.search'
+            }
+        }
+    }
 
 }
 
