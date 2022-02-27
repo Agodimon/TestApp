@@ -1,4 +1,4 @@
-package com.example.testapp
+package com.example.testapp.view.search
 
 import android.os.Bundle
 import android.view.View
@@ -7,17 +7,14 @@ import android.widget.*
 import android.widget.TextView.OnEditorActionListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.testapp.R
 
 import com.example.testapp.model.SearchResult
 import com.example.testapp.presenter.search.PresenterSearchContract
 import com.example.testapp.presenter.search.SearchPresenter
 import com.example.testapp.repository.FakeGitHubRepository
-import com.example.testapp.repository.GitHubApi
-import com.example.testapp.repository.GitHubRepository
 import com.example.testapp.repository.RepositoryContract
 import com.example.testapp.view.details.DetailsActivity
-import com.example.testapp.view.search.SearchResultAdapter
-import com.example.testapp.view.search.ViewSearchContract
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -113,5 +110,4 @@ class FakeMainActivity : AppCompatActivity(), ViewSearchContract {
         const val BASE_URL = "https://api.github.com"
         const val FAKE = "FAKE"
     }
-
 }

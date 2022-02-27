@@ -14,7 +14,7 @@
             android:name=".view.details.DetailsActivity"
             android:exported="true" />
         <activity
-            android:name=".FakeMainActivity"
+            android:name=".view.search.FakeMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
