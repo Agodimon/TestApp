@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+
 android {
     compileSdk 32
 
@@ -36,10 +37,31 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    flavorDimensions "default"
+    productFlavors {
+        fake {
+            applicationIdSuffix ".fake"
+            versionNameSuffix "-fake"
+            buildConfigField "String", "TYPE", '"FAKE"'
+        }
+        real {
+            applicationIdSuffix ".real"
+            versionNameSuffix "-real"
+            buildConfigField "String", "TYPE", '"REAL"'
+        }
+    }
+    sourceSets {
+        fake {
+            java {
+                srcDirs 'src/fake/java', 'src/fake/java/com.example.testapp.view.search'
+            }
+        }
+    }
+
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
@@ -50,7 +72,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     testImplementation "org.mockito:mockito-core:4.1.0"
-
     testImplementation 'org.mockito:mockito-inline:4.1.0'
     testImplementation('com.nhaarman:mockito-kotlin:1.5.0') {
         exclude group: 'org.jetbrains.kotlin'
@@ -70,6 +91,7 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxjava:2.2.21")
     // https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxkotlin
     runtimeOnly("io.reactivex.rxjava2:rxkotlin:2.4.0")
+
 
 
 
