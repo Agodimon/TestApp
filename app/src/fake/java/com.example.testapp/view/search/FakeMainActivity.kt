@@ -15,6 +15,7 @@ import com.example.testapp.presenter.search.SearchPresenter
 import com.example.testapp.repository.FakeGitHubRepository
 import com.example.testapp.repository.RepositoryContract
 import com.example.testapp.view.details.DetailsActivity
+import com.example.testapp.view.search.MainActivity.Companion.BASE_URL
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -46,23 +47,12 @@ class FakeMainActivity : AppCompatActivity(), ViewSearchContract {
     }
 
     private fun setQueryListener() {
-        findViewById<EditText>(R.id.searchEditText).setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                val query = findViewById<EditText>(R.id.searchEditText).text.toString()
-                if (query.isNotBlank()) {
-                    presenter.searchGitHub(query)
-                    return@OnEditorActionListener true
-                } else {
-                    Toast.makeText(
-                        this@FakeMainActivity,
-                        getString(R.string.enter_search_word),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@OnEditorActionListener false
-                }
+        findViewById<Button>(R.id.searchButton).setOnClickListener {
+            val query = findViewById<TextView>(R.id.searchEditText).text.toString()
+            if (query.isNotBlank()) {
+                presenter.searchGitHub(query)
             }
-            false
-        })
+        }
     }
 
     private fun createRepository(): RepositoryContract {

@@ -46,7 +46,7 @@ class DetailsPresenterTest {
 
     @Test
     fun attachView_PresenterTest() {
-        presenter.onAttach(viewContract)
+//        presenter.onAttach(viewContract)
         val instance = presenter.javaClass
         instance.declaredFields.forEach {
             it.isAccessible = true
@@ -58,7 +58,7 @@ class DetailsPresenterTest {
 
     @Test
     fun detachView_Presenter_Test() {
-        presenter.onDetach()
+//        presenter.onDetach()
         val instance = presenter.javaClass
         instance.declaredFields.forEach {
             it.isAccessible = true

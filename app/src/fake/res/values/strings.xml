@@ -9,6 +9,7 @@
     <string name="increment_text">+</string>
     <string name="to_details">to details</string>
     <string name="totalCountTextView2">FAKE</string>
+    <string name="search_button">searchButton</string>
 
 
 </resources>
