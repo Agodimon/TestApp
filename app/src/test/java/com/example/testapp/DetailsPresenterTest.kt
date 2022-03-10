@@ -50,7 +50,7 @@ class DetailsPresenterTest {
         val instance = presenter.javaClass
         instance.declaredFields.forEach {
             it.isAccessible = true
-            if (it.name == "view") {
+            if (it.name == TEST_VIEW) {
                 Assert.assertEquals(viewContract, it.get(presenter))
             }
         }
@@ -62,7 +62,7 @@ class DetailsPresenterTest {
         val instance = presenter.javaClass
         instance.declaredFields.forEach {
             it.isAccessible = true
-            if (it.name == "view"){
+            if (it.name == TEST_VIEW){
                 Assert.assertNull(it.get(presenter))
             }
         }
