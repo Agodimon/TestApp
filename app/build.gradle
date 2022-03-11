@@ -1,8 +1,13 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-}
 
+}
+configurations.all {
+    resolutionStrategy{
+        exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+    }
+}
 
 android {
     compileSdk 32
@@ -38,6 +43,7 @@ android {
         viewBinding true
     }
 
+
     flavorDimensions "default"
     productFlavors {
         fake {
@@ -64,6 +70,10 @@ android {
         test {
             java.srcDirs += "src/sharedTestData/java"
         }
+    }
+
+    packagingOptions{
+        resources.excludes.add("META-INF/*")
     }
 
 }
@@ -103,5 +113,14 @@ dependencies {
 
 //    UI Automator
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+    implementation platform('com.google.firebase:firebase-bom:29.1.0')
+
+    //Kaspresso
+    def latest_version = "1.4.1"
+    androidTestImplementation "com.kaspersky.android-components:kaspresso:$latest_version"
+    // Allure support
+    androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:$latest_version"
+    // Jetpack Compose support
+    androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:$latest_version"
 
 }
