@@ -1,8 +1,13 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-}
 
+}
+configurations.all {
+    resolutionStrategy{
+        exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+    }
+}
 
 android {
     compileSdk 32
@@ -38,6 +43,7 @@ android {
         viewBinding true
     }
 
+
     flavorDimensions "default"
     productFlavors {
         fake {
@@ -51,12 +57,23 @@ android {
             buildConfigField "String", "TYPE", '"REAL"'
         }
     }
+
     sourceSets {
         fake {
             java {
                 srcDirs 'src/fake/java', 'src/fake/java/com.example.testapp.view.search'
             }
         }
+        androidTest {
+            java.srcDirs += "src/sharedTestData/java"
+        }
+        test {
+            java.srcDirs += "src/sharedTestData/java"
+        }
+    }
+
+    packagingOptions{
+        resources.excludes.add("META-INF/*")
     }
 
 }
@@ -68,7 +85,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0-alpha04'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     testImplementation "org.mockito:mockito-core:4.1.0"
@@ -84,16 +101,26 @@ dependencies {
     testImplementation 'androidx.test:runner:1.4.0'
     testImplementation 'androidx.test.ext:junit:1.1.3'
     testImplementation 'androidx.test.ext:truth:1.4.0'
-    testImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    testImplementation 'androidx.test.espresso:espresso-core:3.5.0-alpha04'
     testImplementation 'androidx.test.espresso:espresso-intents:3.4.0'
 
     // https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjava
     implementation("io.reactivex.rxjava2:rxjava:2.2.21")
+    androidTestImplementation 'androidx.test:rules:1.4.1-alpha04'
     // https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxkotlin
     runtimeOnly("io.reactivex.rxjava2:rxkotlin:2.4.0")
 
 
 //    UI Automator
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+    implementation platform('com.google.firebase:firebase-bom:29.1.0')
+
+    //Kaspresso
+    def latest_version = "1.4.1"
+    androidTestImplementation "com.kaspersky.android-components:kaspresso:$latest_version"
+    // Allure support
+    androidTestImplementation "com.kaspersky.android-components:kaspresso-allure-support:$latest_version"
+    // Jetpack Compose support
+    androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:$latest_version"
 
 }

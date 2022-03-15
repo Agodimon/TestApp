@@ -9,6 +9,7 @@ import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
+import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -18,9 +19,6 @@ import org.junit.runner.RunWith
 @SdkSuppress(minSdkVersion = 18)
 class DetailsScreenTest {
 
-    companion object {
-        private const val TIMEOUT = 5000L
-    }
 
     private val uiDevice = UiDevice.getInstance(getInstrumentation())
 
@@ -51,7 +49,7 @@ class DetailsScreenTest {
 
         val changedText =
             uiDevice.wait(
-                Until.findObject(By.res(packageName, "numberOfResults")),
+                Until.findObject(By.res(packageName, "totalCountTextView")),
                 TIMEOUT
             )
 
@@ -61,7 +59,7 @@ class DetailsScreenTest {
     @Test
     fun test_DetailsScreenShowsSearchedResultsCount() {
         val editText = uiDevice.findObject(By.res(packageName, "searchEditText"))
-        val searchButton = uiDevice.findObject(By.res(packageName, "fabSearchButton"))
+        val searchButton = uiDevice.findObject(By.res(packageName, "searchButton"))
         val toDetails = uiDevice.findObject(
             By.res(
                 packageName,
@@ -80,12 +78,12 @@ class DetailsScreenTest {
 
         toDetails.click()
 
-        val numberOfResults = uiDevice.wait(
-            Until.findObject(By.res(packageName, "numberOfResults")),
+        val totalCountTV = uiDevice.wait(
+            Until.findObject(By.res(packageName, "totalCountTextView")),
             TIMEOUT
-        )
+        ).text.toString()
 
-        assertEquals(changedText, numberOfResults.text.toString())
+        Assert.assertEquals(changedText, totalCountTV)
     }
 
     @Test
@@ -98,15 +96,15 @@ class DetailsScreenTest {
         )
         toDetails.click()
 
-        val numberOfResults = uiDevice.wait(
-            Until.findObject(By.res(packageName, "numberOfResults")),
+        val totalCountTextView = uiDevice.wait(
+            Until.findObject(By.res(packageName, "totalCountTextView")),
             TIMEOUT
         )
 
         val incrementButton = uiDevice.findObject(By.res(packageName, "incrementButton"))
         incrementButton.click()
 
-        assertEquals("Number of results: 1", numberOfResults.text.toString())
+        assertEquals("Number of results: 1", totalCountTextView.text.toString())
     }
 
     @Test
@@ -119,8 +117,8 @@ class DetailsScreenTest {
         )
         toDetails.click()
 
-        val numberOfResults = uiDevice.wait(
-            Until.findObject(By.res(packageName, "numberOfResults")),
+        val totalCountTextView = uiDevice.wait(
+            Until.findObject(By.res(packageName, "totalCountTextView")),
             TIMEOUT
         )
 
@@ -129,7 +127,10 @@ class DetailsScreenTest {
         decrementButton.click()
         decrementButton.click()
 
-        assertEquals("Number of results: -3", numberOfResults.text.toString())
+        Assert.assertEquals("Number of results: -3", totalCountTextView.text.toString())
     }
 
+    companion object {
+        private const val TIMEOUT = 6000L
+    }
 }

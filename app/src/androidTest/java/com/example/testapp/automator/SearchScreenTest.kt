@@ -19,9 +19,7 @@ import org.junit.runner.RunWith
 @SdkSuppress(minSdkVersion = 18)
 class SearchScreenTest {
 
-    companion object {
-        private const val TIMEOUT = 5000L
-    }
+
 
     private val uiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
@@ -77,5 +75,7 @@ class SearchScreenTest {
 
         assertTrue(uiDevice.hasObject(By.res(packageName, "totalCountTextView")))
     }
-
+    companion object {
+        private const val TIMEOUT = 5000L
+    }
 }
