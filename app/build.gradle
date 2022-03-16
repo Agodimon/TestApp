@@ -123,4 +123,7 @@ dependencies {
     // Jetpack Compose support
     androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:$latest_version"
 
+//Fragment
+    debugImplementation "androidx.fragment:fragment-testing:$latest_version"
+
 }
