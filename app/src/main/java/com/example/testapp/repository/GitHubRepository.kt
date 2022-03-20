@@ -1,6 +1,7 @@
 package com.example.testapp.repository
 
 import com.example.testapp.model.SearchResponse
+import com.example.testapp.presenter.RepositoryContract
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.*
-import android.widget.TextView.OnEditorActionListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testapp.R
@@ -13,9 +12,10 @@ import com.example.testapp.model.SearchResult
 import com.example.testapp.presenter.search.PresenterSearchContract
 import com.example.testapp.presenter.search.SearchPresenter
 import com.example.testapp.repository.FakeGitHubRepository
-import com.example.testapp.repository.RepositoryContract
+import com.example.testapp.presenter.RepositoryContract
+import com.example.testapp.repository.GitHubApi
+import com.example.testapp.repository.GitHubRepository
 import com.example.testapp.view.details.DetailsActivity
-import com.example.testapp.view.search.MainActivity.Companion.BASE_URL
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -47,16 +47,27 @@ class FakeMainActivity : AppCompatActivity(), ViewSearchContract {
     }
 
     private fun setQueryListener() {
-        findViewById<Button>(R.id.searchButton).setOnClickListener {
-            val query = findViewById<TextView>(R.id.searchEditText).text.toString()
-            if (query.isNotBlank()) {
-                presenter.searchGitHub(query)
+        findViewById<EditText>(R.id.searchEditText).setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                val query = findViewById<EditText>(R.id.searchEditText).text.toString()
+                if (query.isNotBlank()) {
+                    presenter.searchGitHub(query)
+                    return@OnEditorActionListener true
+                } else {
+                    Toast.makeText(
+                        this@FakeMainActivity,
+                        getString(R.string.enter_search_word),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@OnEditorActionListener false
+                }
             }
-        }
+            false
+        })
     }
 
     private fun createRepository(): RepositoryContract {
-        return FakeGitHubRepository()
+        return  FakeGitHubRepository()
     }
 
     private fun createRetrofit(): Retrofit {
@@ -100,4 +111,5 @@ class FakeMainActivity : AppCompatActivity(), ViewSearchContract {
         const val BASE_URL = "https://api.github.com"
         const val FAKE = "FAKE"
     }
+
 }

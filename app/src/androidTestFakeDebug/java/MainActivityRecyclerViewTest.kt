@@ -12,6 +12,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 
 
 import com.example.testapp.R
+import com.example.testapp.view.search.FakeMainActivity
 import com.example.testapp.view.search.MainActivity
 import com.example.testapp.view.search.SearchResultAdapter
 import org.hamcrest.Matcher
@@ -23,11 +24,11 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class MainActivityRecyclerViewTest {
 
-    private lateinit var scenario: ActivityScenario<MainActivity>
+    private lateinit var scenario: ActivityScenario<FakeMainActivity>
 
     @Before
     fun setup() {
-        scenario = ActivityScenario.launch(MainActivity::class.java)
+        scenario = ActivityScenario.launch(FakeMainActivity::class.java)
     }
 
     @Test

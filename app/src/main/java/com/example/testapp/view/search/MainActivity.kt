@@ -13,7 +13,7 @@ import com.example.testapp.presenter.search.PresenterSearchContract
 import com.example.testapp.presenter.search.SearchPresenter
 import com.example.testapp.repository.GitHubApi
 import com.example.testapp.repository.GitHubRepository
-import com.example.testapp.repository.RepositoryContract
+import com.example.testapp.presenter.RepositoryContract
 import com.example.testapp.view.details.DetailsActivity
 
 import retrofit2.Retrofit

@@ -2,6 +2,7 @@ package com.example.testapp.repository
 
 import com.example.testapp.model.SearchResponse
 import com.example.testapp.model.SearchResult
+import com.example.testapp.presenter.RepositoryContract
 import retrofit2.Response
 import kotlin.random.Random
 
