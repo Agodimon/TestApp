@@ -13,7 +13,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.testapp.R
 import com.example.testapp.TEST_NUMBER_OF_RESULTS_PLUS_1
 import com.example.testapp.view.details.DetailsFragment
-
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
