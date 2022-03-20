@@ -4,7 +4,7 @@ plugins {
 
 }
 configurations.all {
-    resolutionStrategy{
+    resolutionStrategy {
         exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
     }
 }
@@ -72,7 +72,7 @@ android {
         }
     }
 
-    packagingOptions{
+    packagingOptions {
         resources.excludes.add("META-INF/*")
     }
 
@@ -123,7 +123,9 @@ dependencies {
     // Jetpack Compose support
     androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:$latest_version"
 
-//Fragment
-    debugImplementation "androidx.fragment:fragment-testing:$latest_version"
+    //Fragment
+    debugImplementation 'androidx.fragment:fragment-testing:1.4.1'
+    //RecyclerView
+    debugImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'
 
 }
