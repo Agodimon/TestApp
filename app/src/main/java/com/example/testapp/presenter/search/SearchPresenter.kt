@@ -1,11 +1,8 @@
 package com.example.testapp.presenter.search
 
 import com.example.testapp.model.SearchResponse
-import com.example.testapp.repository.GitHubRepository
-import com.example.testapp.repository.GitHubRepository.GitHubRepositoryCallback
+import com.example.testapp.presenter.RepositoryContract
 import com.example.testapp.repository.RepositoryCallback
-import com.example.testapp.repository.RepositoryContract
-import com.example.testapp.view.ViewContract
 import com.example.testapp.view.search.ViewSearchContract
 import retrofit2.Response
 

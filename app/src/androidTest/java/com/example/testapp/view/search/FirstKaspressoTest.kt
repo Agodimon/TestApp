@@ -53,7 +53,7 @@ class FirstKaspressoTest : TestCase() {
                         repeat(5, { click() })
 
                     }
-                    totalCountTextView{
+                    totalCountTextView {
                         containsText("3336")
                     }
 
@@ -61,7 +61,7 @@ class FirstKaspressoTest : TestCase() {
                         repeat(5, { click() })
 
                     }
-                    totalCountTextView{
+                    totalCountTextView {
                         containsText("3331")
                     }
 
@@ -93,7 +93,6 @@ object DetailsScreen : KScreen<DetailsScreen>() {
 
     val totalCountTextView = KTextView { withId(R.id.totalCountTextView) }
 
-    val checkBox = KCheckBox { withId(R.id.checkBox) }
-
-
 }
+
+
