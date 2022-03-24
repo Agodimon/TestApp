@@ -30,7 +30,6 @@ class DetailsFragmentEspressoTest {
 
     @Test
     fun fragment_testBundle() {
-        //Можно передавать аргументы во Фрагмент, но это необязательно
         val fragmentArgs = bundleOf("TOTAL_COUNT_EXTRA" to 10)
         //Запускаем Fragment с аргументами
         val scenario = launchFragmentInContainer<DetailsFragment>(fragmentArgs)
@@ -52,7 +51,9 @@ class DetailsFragmentEspressoTest {
 
     @Test
     fun fragment_testIncrementButton() {
-        onView(withId(R.id.incrementButton)).perform(click())
-        onView(withId(R.id.totalCountTextView)).check(matches(withText(TEST_NUMBER_OF_RESULTS_PLUS_1)))
+        onView(withId(R.id.incrementButton))
+            .perform(click())
+        onView(withId(R.id.totalCountTextView))
+            .check(matches(withText(TEST_NUMBER_OF_RESULTS_PLUS_1)))
     }
 }
