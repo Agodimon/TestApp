@@ -123,4 +123,10 @@ dependencies {
         // Jetpack Compose support
         androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:$latest_version_kaspresso"
 
+
+
+//RxJava
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 }
