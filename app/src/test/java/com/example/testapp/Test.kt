@@ -14,7 +14,7 @@ class Test {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.openMocks(this)
+        MockitoAnnotations.initMocks(this)
 //        MockitoAnnotations.initMocks(this)
     }
 
